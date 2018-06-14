@@ -16,3 +16,9 @@ Use nodemon to hot reload
 `npm install --save-dev nodemon`
 
 `npm run dev`
+
+== Docker 
+
+`docker build -t bjornna/dataserver .`
+
+`docker run -p 3000:3000 -d bjornna/dataserver`
