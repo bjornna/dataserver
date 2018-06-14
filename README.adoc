@@ -5,4 +5,14 @@ https://blog.leonhassan.co.uk/2018/01/09/setting-up-a-simple-rest-server-in-node
 
 == Run 
 
+`git clone git@github.com:bjornna/dataserver.git`
+
 `npm run start`
+
+== Dev 
+
+Use nodemon to hot reload 
+
+`npm install --save-dev nodemon`
+
+`npm run dev`
