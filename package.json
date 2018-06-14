@@ -1,0 +1,29 @@
+{
+  "name": "dataserver",
+  "version": "1.0.0",
+  "description": "A simple dataserver to use when testing JS in forms",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/bjornna/dataserver.git"
+  },
+  "keywords": [
+    "openehr"
+  ],
+  "author": "bna@dips.no",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bjornna/dataserver/issues"
+  },
+  "homepage": "https://github.com/bjornna/dataserver#readme",
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
