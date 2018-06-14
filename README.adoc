@@ -22,3 +22,44 @@ Use nodemon to hot reload
 `docker build -t bjornna/dataserver .`
 
 `docker run -p 3000:3000 -d bjornna/dataserver`
+
+== Usage 
+The purpose of this dataserver was to explore the JS functionality of DIPS EHR Craft Forms. If you run this simple script inside a form. The systolic and diastolic value will be updated when the form is loaded. Note that the path to systolic and diastolic much match with the form.
+
+[source="javascript"]
+-----
+var SYSTOLIC = "bna_vitale_opplysninger/blodtrykk/uspesifisert_hendelse/systolisk";
+var DIASTOLIC = "bna_vitale_opplysninger/blodtrykk/uspesifisert_hendelse/diastolisk";
+var bloodPressureUrl = "http://localhost:3000/api/blood_pressure";
+
+http.get(bloodPressureUrl, function (result) {
+    if (result.isSuccessStatusCode) {
+        var json = JSON.parse(result.data);
+        console.log("Systolic:" + json.systolic);
+        console.log("Diastolic:" + json.systolic);
+        updateBloodPressure(json.systolic, json.diastolic);
+    } else {
+        console.log("StatusCode: " + result.statusCode);
+        console.log(result.data);
+    }
+});
+
+function updateBloodPressure(systolic, diastolic) {
+    updateSystolic(systolic);
+    updateDiastolic(diastolic);
+}
+
+function updateSystolic(systolic) {
+    var val = new DvQuantity();
+    val.magnitude = systolic;
+    val.units = "mm[Hg]";
+    api.setFieldValue(SYSTOLIC, val);
+}
+
+function updateDiastolic(diastolic) {
+    var val = new DvQuantity();
+    val.magnitude = diastolic;
+    val.units = "mm[Hg]";
+    api.setFieldValue(DIASTOLIC, val);
+}
+-----
