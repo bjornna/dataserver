@@ -4,7 +4,7 @@ const app = express();
 const router = express.Router();
 
 // from top level path e.g. localhost:3000, this response will be sent
-app.get('/', (request, response) => response.send('Hello World'));
+
 
 app.use('/api', router);
 router.get('/', (request, response) => {
@@ -14,6 +14,27 @@ router.get('/', (request, response) => {
 });
 
 const url = require('url');
+
+
+router.get("/pulse", (request, response)=>{
+    response.json(
+        {
+            magnitude: number(60,120), 
+            units:"/min"
+
+        }
+    );
+});
+
+router.get("/spo2", (request, response)=>{
+    response.json(
+        {
+            magnitude: number(96,100), 
+            units:"%"
+
+        }
+    );
+});
 
 router.get('/body_temperature', (request, response) => {
     response.json({
@@ -47,7 +68,8 @@ router.get('/blood_pressure', (request, response) => {
     };
     response.json(result);
 });
-
+//https://expressjs.com/en/starter/static-files.html
+app.use(express.static('public'));
 // set the server to listen on port 3000
 app.listen(3000, () => console.log('Listening on port 3000'));
 
