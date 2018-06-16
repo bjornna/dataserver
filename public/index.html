@@ -5,50 +5,99 @@
     <title>Vital Signs Monitor</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
-        crossorigin="anonymous">
-
 
     <style>
         * {
             box-sizing: border-box;
         }
 
-        
+
         body {
-            background-color: rgb(35, 35, 36);
+            background-color: rgb(76, 94, 84);
             color: rgb(131, 134, 138);
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+
+
+        }
+
+        .vital-container {
+            border: 1px solid rgb(50, 66, 54);
+            width: 350px;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+
         }
 
         h1 {
-            color: rgb(80, 82, 85);
+            color: rgb(38, 53, 44);
             text-align: center;
         }
 
-        div.bp_value {
-            color: red;
-            text-align: center;
-            font-size: 4em;
+        .bp-value {
+            color: rgb(182, 15, 15);
         }
 
-        div.spo2_value {
-            color: yellow;
-            text-align: center;
-            font-size: 4em;
+        .spo2-value {
+            color: rgb(197, 197, 29);
         }
 
-        div.pulse_value {
+        .pulse-value {
             color: rgb(56, 56, 141);
-            text-align: center;
-            font-size: 4em;
         }
 
-        div.temp_value {
-            color: orange;
-            text-align: center;
-            font-size: 4em;
+        .temp-value {
+            color: rgb(187, 127, 14);
+        }
+
+        .vital-title {
+            color: rgb(48, 144, 144);
+            padding-top: 10px;
+        }
+
+        .vital-value {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            font-size: 4.5em;
+            font-style: bold;
+        }
+
+        .vital-units {
+            color: rgb(43, 98, 133);
+            font-size: 1.5em;
+            padding-bottom: 10px;
+
+        }
+
+        /* Use this selector to override the line style on a given series */
+
+        #spo2-chart .ct-series-a .ct-line{
+            /* Set the colour of this series line */
+            stroke: rgb(240, 236, 23);
+            /* Control the thikness of your lines */
+            stroke-width: 5px;
+            /* Create a dashed line with a pattern 
+    stroke-dasharray: 10px 20px;
+    */
+        }
+        #pulse-chart .ct-series-a .ct-line{
+            /* Set the colour of this series line */
+            stroke: rgb(56, 56, 141);
+            /* Control the thikness of your lines */
+            stroke-width: 5px;
+            /* Create a dashed line with a pattern 
+    stroke-dasharray: 10px 20px;
+    */
         }
     </style>
 
@@ -57,55 +106,40 @@
 <body>
     <div class="container-fluid">
         <h1>Vital Signs Monitor</h1>
-        <div class="row">
-            <div class="col-sm">
-                <div class="shadow-lg p-3 mb-5 bg-black rounded">
 
-                    <div class="bp_value">
-                        <span id="bp"></span>
-                    </div>
-                    <h1>Blood pressure</h1>
-                </div>
+        <div class="flex-container">
+            <div class="vital-container">
+                <div class="vital-title">Blood pressure</div>
+                <div class="vital-value bp-value" id="bp"></div>
+                <div class="vital-units">mm[Hg]</div>
             </div>
-            <div class="col-sm">
-                <div class="shadow-lg p-3 mb-5 bg-black rounded">
-
-                    <div class="spo2_value">
-                        <span id="spo2"></span>%</div>
-                    <h1>SpO2</h1>
-                </div>
+            <div class="vital-container">
+                <div class="vital-title">SpO2</div>
+                <div class="vital-value spo2-value" id="spo2"></div>
+                <div class="vital-units">%</div>
             </div>
-            <div class="col-sm">
-
-                <div class="shadow-lg p-3 mb-5 bg-black rounded">
-
-                    <div class="pulse_value">
-                        <span id="pulse"></span> /min</div>
-                    <h1>Puls</h1>
-                </div>
+            <div class="vital-container">
+                <div class="vital-title">Puls</div>
+                <div class="vital-value pulse-value" id="pulse"></div>
+                <div class="vital-units">/min</div>
             </div>
-            <div class="col-sm">
-                <div class="shadow-lg p-3 mb-5 bg-black rounded">
-
-                    <div class="temp_value">
-                        <span id="temp"></span> &#8451;</div>
-                    <h1>Temp</h1>
-                </div>
+            <div class="vital-container">
+                <div class="vital-title">Temp</div>
+                <div class="vital-value temp-value" id="temp"></div>
+                <div class="vital-units"> &#8451;</div>
             </div>
         </div>
+        <h1>Charts</h1>
+        <div class="flex-container">
+            <div class="ct-chart ct-perfect-fourth vital-container" id="spo2-chart"></div>
+            <div class="ct-chart ct-golden-section vital-container" id="pulse-chart"></div>
+        </div>
+
     </div>
 </body>
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-    crossorigin="anonymous"></script>
+<script src="api.js"></script>
+<script src="index.js"></script>
 
-<script src="app.js"></script>
-   
 
 </body>
 

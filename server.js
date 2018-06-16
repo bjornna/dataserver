@@ -25,6 +25,15 @@ router.get("/pulse", (request, response)=>{
         }
     );
 });
+router.get("/respiration", (request, response)=>{
+    response.json(
+        {
+            magnitude: number(20,70), 
+            units:"/min"
+
+        }
+    );
+});
 
 router.get("/spo2", (request, response)=>{
     response.json(
@@ -39,7 +48,7 @@ router.get("/spo2", (request, response)=>{
 router.get('/body_temperature', (request, response) => {
     response.json({
         magnitude: number(36, 42), 
-        units: "CEL"
+        units: "Cel"
     });
 });
 
