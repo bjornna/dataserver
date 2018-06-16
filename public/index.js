@@ -19,7 +19,7 @@
     var spo2Chart = new Chartist.Line('#spo2-chart', {
             labels: [],
             series: [
-                pulseData
+               spo2Data
             ]
         },
         getOptions([60, 70, 80, 90, 100])
