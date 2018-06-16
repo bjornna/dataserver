@@ -16,7 +16,7 @@
 
 
         body {
-            background-color: rgb(76, 94, 84);
+            background-color: rgb(17, 17, 17);
             color: rgb(131, 134, 138);
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         }
@@ -81,18 +81,37 @@
 
         /* Use this selector to override the line style on a given series */
 
-        #spo2-chart .ct-series-a .ct-line{
+        #spo2-chart .ct-series-a .ct-line {
             /* Set the colour of this series line */
-            stroke: rgb(240, 236, 23);
+            stroke: rgb(197, 194, 22);
             /* Control the thikness of your lines */
             stroke-width: 5px;
             /* Create a dashed line with a pattern 
     stroke-dasharray: 10px 20px;
     */
         }
-        #pulse-chart .ct-series-a .ct-line{
+
+        #pulse-chart .ct-series-a .ct-line {
             /* Set the colour of this series line */
             stroke: rgb(56, 56, 141);
+            /* Control the thikness of your lines */
+            stroke-width: 5px;
+            /* Create a dashed line with a pattern 
+    stroke-dasharray: 10px 20px;
+    */
+        }
+        #temp-chart .ct-series-a .ct-line {
+            /* Set the colour of this series line */
+            stroke: rgb(187, 127, 14);
+            /* Control the thikness of your lines */
+            stroke-width: 5px;
+            /* Create a dashed line with a pattern 
+    stroke-dasharray: 10px 20px;
+    */
+        }
+        #bp-chart .ct-series-a .ct-line {
+            /* Set the colour of this series line */
+         
             /* Control the thikness of your lines */
             stroke-width: 5px;
             /* Create a dashed line with a pattern 
@@ -131,8 +150,10 @@
         </div>
         <h1>Charts</h1>
         <div class="flex-container">
+            <div class="ct-chart ct-perfect-fourth vital-container" id="bp-chart"></div>
             <div class="ct-chart ct-perfect-fourth vital-container" id="spo2-chart"></div>
             <div class="ct-chart ct-golden-section vital-container" id="pulse-chart"></div>
+            <div class="ct-chart ct-perfect-fourth vital-container" id="temp-chart"></div>
         </div>
 
     </div>
