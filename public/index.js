@@ -63,12 +63,12 @@
             for (let index = 0; index < pulseData.length; index++) {
                 labels.push(index);
             }
-            var data = {
+            var chartData = {
                 labels: labels,
                 series: [pulseData]
             }
             document.getElementById("pulse").textContent = d;
-            pulseChart.update(data);
+            pulseChart.update(chartData);
 
         });
         loadTemp(function (data) {
@@ -83,15 +83,16 @@
             for (let index = 0; index < tempData.length; index++) {
                 labels.push(index);
             }
-            var data = {
+            var chartData = {
                 labels: labels,
                 series: [tempData]
             }
-            tempChart.update(data);
+            tempChart.update(chartData);
         });
         loadSpO2(function (data) {
-            document.getElementById("spo2").textContent = data.magnitude;
-            spo2Data.push(data.magnitude);
+            var d = data.magnitude;
+            document.getElementById("spo2").textContent = d;
+            spo2Data.push(d);
             if (spo2Data.length > chartSeriesLength) {
                 spo2Data.shift();
             }
@@ -99,11 +100,11 @@
             for (let index = 0; index < spo2Data.length; index++) {
                 labels.push(index);
             }
-            var data = {
+            var chartData = {
                 labels: labels,
                 series: [spo2Data]
             }
-            spo2Chart.update(data);
+            spo2Chart.update(chartData);
         });
 
         loadBloodPressure(function (data) {
@@ -121,13 +122,13 @@
                 labels.push(index);
 
             }
-            var data = {
+            var chartData = {
                 labels: labels,
                 series: [bpDataSystolic, bpDataDiastolic]
             }
 
             document.getElementById("bp").textContent = s + "/" + d;
-            bpChart.update(data);
+            bpChart.update(chartData);
         });
     }
 
